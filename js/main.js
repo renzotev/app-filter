@@ -31,50 +31,64 @@ var $consultas_auto = function (id, filtro, value) {
 $("#marca").change( function () {
 	var selected = $(this).find("option:selected").val();
 	consulta_url[1]= "marca="+selected;
-	//alert(consulta_url);
-	$("#consultar").attr("href", consulta_url);
 
 	if (selected == "-1") {
 		$("#modelo").html("<option value='-1'>Modelo</option>");
 		$("#version").html("<option value='-1'>Versión</option>");
 		$("#anio").html("<option value='-1'>Anio</option>");
+		consulta_url.splice(1, 4);	
 	}else {
 		$consultas_auto("#modelo","marca",selected);
 	}
-	
+	$("#consultar").attr("href", consulta_url.join(""));
 });
 
 $("#modelo").change( function () {
 	var selected = $(this).find("option:selected").val();
 	consulta_url[2] = "&modelo="+selected;
-	$("#consultar").attr("href", consulta_url);
+
 
 	if (selected == "-1") {
 		$("#version").html("<option value='-1'>Versión</option>");
 		$("#anio").html("<option value='-1'>Anio</option>");
+		consulta_url.splice(2, 3);
 	}else {
 		$consultas_auto("#version","modelo",selected);
 	}
-	
+	$("#consultar").attr("href", consulta_url.join(""));
 });
 
 $("#version").change( function () {
 	var selected = $(this).find("option:selected").val();
 	consulta_url[3] = "&version="+selected;
-	$("#consultar").attr("href", consulta_url);
 
 	if (selected == "-1") {
 		$("#anio").html("<option value='-1'>Anio</option>");
+		consulta_url.splice(3, 2);
 	}else {
 		$consultas_auto("#anio","version",selected);
 	}
-	
+	$("#consultar").attr("href", consulta_url.join(""));
 });
 
 $("#anio").change( function () {
 	var selected = $(this).find("option:selected").val();
-	consulta_url[4] = "&anio="+selected;			
+	consulta_url[4] = "&anio="+selected;
+	if (selected == "-1") {
+		consulta_url.splice(4, 1);
+	}
+	$("#consultar").attr("href", consulta_url.join(""));
 });
 
 
 $consultas_auto("#marca", 0, "");
+
+(function () {
+	var id = ["#modelo", "#version", "#anio"];
+	
+	for (i=0; i<id.length; i++) {
+		console.log(id[i]);
+		var opt_text = $( id[i] ).find("option[value='-1']").text();
+		$( id[i] ).html("<option value='-1'>" + opt_text + "</option>");
+	}
+})();
