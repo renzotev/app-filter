@@ -30,6 +30,8 @@ var $consultas_auto = function (id, filtro, value) {
 
 $("#marca").change( function () {
 	var selected = $(this).find("option:selected").val();
+	selected = $.md5(selected);
+	console.log(selected);
 	consulta_url[1]= "marca="+selected;
 
 	if (selected == "-1") {
@@ -45,6 +47,7 @@ $("#marca").change( function () {
 
 $("#modelo").change( function () {
 	var selected = $(this).find("option:selected").val();
+	selected = $.md5(selected, "qJB0rGtIn5UB1xG03efyCp");
 	consulta_url[2] = "&modelo="+selected;
 
 
@@ -60,6 +63,7 @@ $("#modelo").change( function () {
 
 $("#version").change( function () {
 	var selected = $(this).find("option:selected").val();
+	selected = $.md5(selected, "qJB0rGtIn5UB1xG03efyCp");
 	consulta_url[3] = "&version="+selected;
 
 	if (selected == "-1") {
@@ -73,6 +77,7 @@ $("#version").change( function () {
 
 $("#anio").change( function () {
 	var selected = $(this).find("option:selected").val();
+	selected = $.md5(selected, "qJB0rGtIn5UB1xG03efyCp");
 	consulta_url[4] = "&anio="+selected;
 	if (selected == "-1") {
 		consulta_url.splice(4, 1);
