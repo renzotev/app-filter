@@ -23,12 +23,12 @@
                 <h1>Filtro de baterias</h1>
                 <div class="row">
                     <div class="col-sm-4 col-sm-offset-4">
-                        <select id="marca" class="form-control">
+                        <select id="marca" class="form-control" required>
                             <option value="-1">Marca</option>
                         </select>
                     </div>
                     <div class="col-sm-4 col-sm-offset-4">
-                        <select id="modelo" class="form-control">
+                        <select id="modelo" class="form-control" required>
                             <option value="-1">Modelo</option>
                         </select>
                     </div>
@@ -43,7 +43,7 @@
                         </select>
                     </div>
                 </div>
-                
+                <div id="loadingDiv">Loading...</div>
                 <p><a id="consultar" href="#" class="btn btn-primary btn-lg" role="button">Consultar</a></p>
             </div>
         </div>

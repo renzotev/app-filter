@@ -7,11 +7,13 @@ var $consultas_auto = function (id, filtro, value) {
 		var consulta_get = "php/consult_autos.php?"+filtro+"="+value;
 	}
 
+	$('#loadingDiv').show();
+
 	$.getJSON( consulta_get, function( data ) {
 	  var items = [];
 	  $.each( data.autos, function( key, val ) {
 	  		if (filtro == "marca") {
-	  			items.push( "<option value="+val.modelo+">"+val.modelo+"</option>" );
+	  			items.push( "<option value="+val.modelo_id+">"+val.modelo+"</option>" );
 	  		}else if (filtro == "modelo") {
 	  			items.push( "<option value="+val.version+">"+val.version+"</option>" );
 	  		}else if (filtro == "version") {
@@ -24,14 +26,13 @@ var $consultas_auto = function (id, filtro, value) {
 	   	var opt_text = $( id ).find("option[value='-1']").text();
 	   	$( id ).html("<option value='-1'>" + opt_text + "</option>");
 	   	$( id ).append(items);
+	   	$('#loadingDiv').hide();
 
 	});
 };
 
 $("#marca").change( function () {
 	var selected = $(this).find("option:selected").val();
-	selected = $.md5(selected);
-	console.log(selected);
 	consulta_url[1]= "marca="+selected;
 
 	if (selected == "-1") {
@@ -47,7 +48,6 @@ $("#marca").change( function () {
 
 $("#modelo").change( function () {
 	var selected = $(this).find("option:selected").val();
-	selected = $.md5(selected, "qJB0rGtIn5UB1xG03efyCp");
 	consulta_url[2] = "&modelo="+selected;
 
 
@@ -63,7 +63,6 @@ $("#modelo").change( function () {
 
 $("#version").change( function () {
 	var selected = $(this).find("option:selected").val();
-	selected = $.md5(selected, "qJB0rGtIn5UB1xG03efyCp");
 	consulta_url[3] = "&version="+selected;
 
 	if (selected == "-1") {
@@ -77,7 +76,6 @@ $("#version").change( function () {
 
 $("#anio").change( function () {
 	var selected = $(this).find("option:selected").val();
-	selected = $.md5(selected, "qJB0rGtIn5UB1xG03efyCp");
 	consulta_url[4] = "&anio="+selected;
 	if (selected == "-1") {
 		consulta_url.splice(4, 1);
@@ -92,7 +90,6 @@ $consultas_auto("#marca", 0, "");
 	var id = ["#modelo", "#version", "#anio"];
 	
 	for (i=0; i<id.length; i++) {
-		console.log(id[i]);
 		var opt_text = $( id[i] ).find("option[value='-1']").text();
 		$( id[i] ).html("<option value='-1'>" + opt_text + "</option>");
 	}

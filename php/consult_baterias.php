@@ -7,20 +7,20 @@
 		if (isset($_GET["marca"]) && isset($_GET["modelo"])) { 
 			$marca = $_GET["marca"]; 
 			$modelo = $_GET["modelo"];  
-			$query = "SELECT marca_bateria,modelo_bateria,sku_bateria FROM datos WHERE marca_auto='$marca' AND modelo_auto='$modelo'"; 
+			$query = "SELECT marca_bateria,modelo_bateria,sku_bateria FROM datos WHERE marca_auto='$marca' AND modelo_id='$modelo'"; 
 		}
 		if (isset($_GET["marca"]) && isset($_GET["modelo"]) && isset($_GET["version"])) { 
 			$marca = $_GET["marca"]; 
 			$modelo = $_GET["modelo"];
 			$version = $_GET["version"];    
-			$query = "SELECT marca_bateria,modelo_bateria,sku_bateria FROM datos WHERE marca_auto='$marca' AND modelo_auto='$modelo' AND version_auto='$version'"; 
+			$query = "SELECT marca_bateria,modelo_bateria,sku_bateria FROM datos WHERE marca_auto='$marca' AND modelo_id='$modelo' AND version_auto='$version'"; 
 		}
 		if (isset($_GET["marca"]) && isset($_GET["modelo"]) && isset($_GET["version"]) && isset($_GET["anio"])) { 
 			$marca = $_GET["marca"]; 
 			$modelo = $_GET["modelo"];
 			$version = $_GET["version"];
 			$anio = $_GET["anio"];  
-			$query = "SELECT marca_bateria,modelo_bateria,sku_bateria FROM datos WHERE marca_auto='$marca' AND modelo_auto='$modelo' AND version_auto='$version' AND anio_auto='$anio'"; 
+			$query = "SELECT marca_bateria,modelo_bateria,sku_bateria FROM datos WHERE marca_auto='$marca' AND modelo_id='$modelo' AND version_auto='$version' AND anio_auto='$anio'"; 
 		}
 		
 	} 
