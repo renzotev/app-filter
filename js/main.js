@@ -1,10 +1,25 @@
-var consulta_url = ["resultados.html?"];
+var consulta_url = ["?"];
 
-var $consultas_auto = function (id, filtro, value) {
+var $consultas_auto = function (id, filtro) {
+	
 	if (filtro == 0) {
 		var consulta_get = "php/consult_autos.php";
 	}else {
-		var consulta_get = "php/consult_autos.php?"+filtro+"="+value;
+		var ma = $("#marca").val();
+		var mo = $("#modelo").val();
+		var ver = $("#version").val();
+		var an = $("#anio").val();
+
+		if (filtro == "marca") {
+			var consulta_get = "php/consult_autos.php?marca="+ma;
+		}else if (filtro == "modelo")  {
+			var consulta_get = "php/consult_autos.php?marca="+ma+"&modelo="+mo;
+		}else if (filtro == "version") {
+			var consulta_get = "php/consult_autos.php?marca="+ma+"&modelo="+mo+"&version="+ver;
+		}else if (filtro == "anio") {
+			var consulta_get = "php/consult_autos.php?marca="+ma+"&modelo="+mo+"&version="+ver+"&anio="+an;
+		}
+		
 	}
 
 	$('#loadingDiv').show();
@@ -27,6 +42,11 @@ var $consultas_auto = function (id, filtro, value) {
 	   	$( id ).html("<option value='-1'>" + opt_text + "</option>");
 	   	$( id ).append(items);
 	   	$('#loadingDiv').hide();
+	   //console.log($("#anio").val( $("#anio").val().replace('+', '%2B') ));
+
+	   	$('#anio option').val(function(index, value) {
+		   return value.replace('+', '%2B');
+		});
 
 	});
 };
@@ -35,30 +55,33 @@ $("#marca").change( function () {
 	var selected = $(this).find("option:selected").val();
 	consulta_url[1]= "marca="+selected;
 
+	$("#version").html("<option value='-1'>Versión</option>");
+	$("#anio").html("<option value='-1'>Año</option>");
+
 	if (selected == "-1") {
 		$("#modelo").html("<option value='-1'>Modelo</option>");
-		$("#version").html("<option value='-1'>Versión</option>");
-		$("#anio").html("<option value='-1'>Anio</option>");
+		
 		consulta_url.splice(1, 4);	
 	}else {
-		$consultas_auto("#modelo","marca",selected);
+		$consultas_auto("#modelo","marca");
 	}
-	$("#consultar").attr("href", consulta_url.join(""));
+	$("#consultar").attr("href", "resultados.html"+consulta_url.join(""));
 });
 
 $("#modelo").change( function () {
 	var selected = $(this).find("option:selected").val();
 	consulta_url[2] = "&modelo="+selected;
 
+	$("#anio").html("<option value='-1'>Año</option>");
 
 	if (selected == "-1") {
 		$("#version").html("<option value='-1'>Versión</option>");
-		$("#anio").html("<option value='-1'>Anio</option>");
+		
 		consulta_url.splice(2, 3);
 	}else {
-		$consultas_auto("#version","modelo",selected);
+		$consultas_auto("#version","modelo");
 	}
-	$("#consultar").attr("href", consulta_url.join(""));
+	$("#consultar").attr("href", "resultados.html"+consulta_url.join(""));
 });
 
 $("#version").change( function () {
@@ -66,12 +89,13 @@ $("#version").change( function () {
 	consulta_url[3] = "&version="+selected;
 
 	if (selected == "-1") {
-		$("#anio").html("<option value='-1'>Anio</option>");
+		$("#anio").html("<option value='-1'>Año</option>");
 		consulta_url.splice(3, 2);
 	}else {
-		$consultas_auto("#anio","version",selected);
-	}
-	$("#consultar").attr("href", consulta_url.join(""));
+		$consultas_auto("#anio","version");
+	}	
+
+	$("#consultar").attr("href", "resultados.html"+consulta_url.join(""));
 });
 
 $("#anio").change( function () {
@@ -80,11 +104,11 @@ $("#anio").change( function () {
 	if (selected == "-1") {
 		consulta_url.splice(4, 1);
 	}
-	$("#consultar").attr("href", consulta_url.join(""));
+	$("#consultar").attr("href", "resultados.html"+consulta_url.join(""));
 });
 
 
-$consultas_auto("#marca", 0, "");
+$consultas_auto("#marca", 0);
 
 (function () {
 	var id = ["#modelo", "#version", "#anio"];

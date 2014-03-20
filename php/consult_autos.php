@@ -1,12 +1,33 @@
 <?php
 
 	if (isset($_GET["marca"]) || isset($_GET["modelo"]) || isset($_GET["version"])) {
-		if (isset($_GET["marca"])){ $marca = $_GET["marca"]; $query = "SELECT  DISTINCT modelo_id,modelo_auto FROM datos WHERE marca_auto='$marca'"; $columID = "modelo_id"; $colum = "modelo_auto"; $columJ = "modelo"; }
-		if (isset($_GET["modelo"])){ $modelo = $_GET["modelo"]; $query = "SELECT DISTINCT version_auto FROM datos WHERE modelo_auto='$modelo'"; $colum = "version_auto"; $columJ = "version"; }
-		if (isset($_GET["version"])){ $version = $_GET["version"]; $query = "SELECT DISTINCT anio_auto FROM datos WHERE version_auto='$version'"; $colum = "anio_auto"; $columJ = "anio"; }
+		if (isset($_GET["marca"])) { 
+			$marca = $_GET["marca"];
+			$query = "SELECT  DISTINCT modelo_id,modelo_auto FROM datos WHERE marca_auto='$marca' ORDER BY modelo_id ASC";
+			$columID = "modelo_id";
+			$colum = "modelo_auto";
+			$columJ = "modelo";
+		}
+		if (isset($_GET["marca"]) && isset($_GET["modelo"])) {
+			unset($columID); 
+			$marca = $_GET["marca"];
+			$modelo = $_GET["modelo"];
+			$query = "SELECT DISTINCT version_auto FROM datos WHERE marca_auto='$marca' AND modelo_id='$modelo' ORDER BY version_auto ASC";
+			$colum = "version_auto";
+			$columJ = "version";
+		}
+		if (isset($_GET["marca"]) && isset($_GET["modelo"]) && isset($_GET["version"])) {
+			unset($columID); 
+			$marca = $_GET["marca"];
+			$modelo = $_GET["modelo"];
+			$version = $_GET["version"];
+			$query = "SELECT DISTINCT anio_auto FROM datos WHERE marca_auto='$marca' AND modelo_id='$modelo' AND version_auto='$version' ORDER BY anio_auto ASC";
+			$colum = "anio_auto";
+			$columJ = "anio";
+		}
 	} else {
 		$colum = "marca_auto";
-		$query = "SELECT DISTINCT marca_auto FROM datos";
+		$query = "SELECT DISTINCT marca_auto FROM datos ORDER BY marca_auto ASC";
 		$columJ = "marca";
 	}
 
