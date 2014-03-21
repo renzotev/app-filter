@@ -1,0 +1,52 @@
+{
+	"IcoMoonType": "selection",
+	"icons": [
+		{
+			"icon": {
+				"paths": [
+					"M585.143 621.714q0 14.857-10.857 25.714l-256 256q-10.857 10.857-25.714 10.857t-25.714-10.857l-256-256q-10.857-10.857-10.857-25.714t10.857-25.714 25.714-10.857h512q14.857 0 25.714 10.857t10.857 25.714zM585.143 402.286q0 14.857-10.857 25.714t-25.714 10.857h-512q-14.857 0-25.714-10.857t-10.857-25.714 10.857-25.714l256-256q10.857-10.857 25.714-10.857t25.714 10.857l256 256q10.857 10.857 10.857 25.714z"
+				],
+				"width": 585,
+				"tags": [
+					"sort",
+					"menu",
+					"dropdown",
+					"arrows"
+				],
+				"grid": 14
+			},
+			"properties": {
+				"id": 195,
+				"order": 1,
+				"prevSize": 28,
+				"code": 58880,
+				"name": "sort",
+				"ligatures": ""
+			},
+			"setIdx": 0,
+			"iconIdx": 195
+		}
+	],
+	"height": 1024,
+	"metadata": {
+		"name": "icomoon"
+	},
+	"preferences": {
+		"showGlyphs": true,
+		"showQuickUse": true,
+		"fontPref": {
+			"prefix": "icon-",
+			"metadata": {
+				"fontFamily": "icomoon"
+			},
+			"metrics": {
+				"emSize": 512,
+				"baseline": 6.25,
+				"whitespace": 50
+			}
+		},
+		"imagePref": {},
+		"historySize": 100,
+		"showCodes": true
+	}
+}
