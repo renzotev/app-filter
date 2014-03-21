@@ -5,22 +5,58 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
-        <title>Baterias</title>
+        <title>SODIMAC - Elige la batería correcta para tu auto</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <!--<link rel="stylesheet" href="css/bootstrap.min.css">-->
         <link rel="stylesheet" href="css/style.css">
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         
+        <style type="text/css">
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+            }
+
+            h1 {
+                margin: 0;
+            }
+        
+            footer {
+                position:absolute;
+                bottom:0;
+                width:100%;
+                height:60px;
+                background:#6cf;
+            }
+
+            .main {
+                 padding:10px 10px 60px 10px;
+                 max-width: 960px;
+                 margin: 0 auto;
+            }
+
+            .wrapper {
+                min-height: 100%;
+                position: relative;
+            }
+
+            
+
+        </style>
     </head>
     <body>
         <!--[if lt IE 8]>
             <p class="chromeframe">Estas usando una <strong>versión desactualizada</strong> de tu navegador. Por favor <a href="http://browsehappy.com/">actualiza tu navegador</a> o <a href="http://www.google.com/chromeframe/?redirect=true">activa Google Chrome Frame</a> para una mejor experiencia.</p>
         <![endif]-->
-
-        <div class="container">
-            <div class="jumbotron">
-                <h1>Filtro de baterias</h1>
+        
+        <div class="wrapper">
+            <header>
+                <h1>ELIGE LA BATERÍA CORRECTA PARA TU AUTO</h1>
+            </header>
+            <div class="main">
                 <div class="row">
                     <div class="col-sm-4 col-sm-offset-4">
                         <select id="marca" class="form-control" required>
@@ -46,7 +82,10 @@
                 <div id="loadingDiv">Loading...</div>
                 <p><a id="consultar" href="#" class="btn btn-primary btn-lg" role="button">Consultar</a></p>
             </div>
+            <footer><img src="#" alt="logo"></footer>
         </div>
+        
+                
 
         <script src="js/vendor/jquery-1.10.2.min.js"></script>
 		<script src="js/vendor/bootstrap.min.js"></script>
