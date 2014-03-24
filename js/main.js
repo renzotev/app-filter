@@ -43,16 +43,16 @@ var $consultas_auto = function (id, filtro) {
 	  		}else if (filtro == "version") {
 	  			var val_anio = val.anio.replace('+', '%2B').replace(' ', '%20');
 
-	  			if (val.anio.charAt(val.anio.length - 1) == '-') {
+	  			/*if (val.anio.charAt(val.anio.length - 1) == '-') {
 					var minus = ' o anteriores';
 				}else {
 					var minus = ' al '
 				}
 
-				var text_anio = val.anio.replace('+', ' en adelante').replace('-', minus);
+				var text_anio = val.anio.replace('+', ' en adelante').replace('-', minus);*/
 	  			//var text_anio = "sdas + - asda".allReplace({' ': '%20', '+': 'o más', '-': minus, });
 
-	  			items.push( "<option value="+val_anio+">"+text_anio+"</option>" );
+	  			items.push( "<option value="+val_anio+">"+val.anio+"</option>" );
 	  		}else {
 	  			var val_marca = val.marca.replace(' ', '%20');
 	  			items.push( "<option value="+val_marca+">"+val.marca+"</option>" );
@@ -76,7 +76,7 @@ $("#marca").change( function () {
 	var selected = $(this).find("option:selected").val();
 	consulta_url[1]= "marca="+selected;
 
-	$("#version").html("<option value='-1'>Versión</option>");
+	$("#version").html("<option value='-1'>Combustible</option>");
 	$("#anio").html("<option value='-1'>Año</option>");
 
 	$("#version").parent().addClass("input-disabled");
@@ -110,7 +110,7 @@ $("#modelo").change( function () {
 	$("#anio").prop("disabled", true);
 
 	if (selected == "-1") {
-		$("#version").html("<option value='-1'>Versión</option>");
+		$("#version").html("<option value='-1'>Combustible</option>");
 
 		$("#version").parent().addClass("input-disabled");
 
