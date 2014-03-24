@@ -96,7 +96,7 @@ $("#marca").change( function () {
 	}else {
 		$consultas_auto("#modelo","marca");
 	}
-	$("#consultar").attr("href", "resultados.html"+consulta_url.join(""));
+	$("#consultar").attr("href", "#");
 });
 
 $("#modelo").change( function () {
