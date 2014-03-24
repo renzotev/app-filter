@@ -9,19 +9,22 @@ var $consultas_bateria = function (id) {
       var items = [];
       $.each( data.baterias, function( key, val ) {
             
-            items.push( '<div class="col-sm-6"> \
-                            <div class="thumbnail"> \
-                                    <div class="caption"> \
-                                    <h3>'+val.marca+'</h3> \
-                                    <p>'+val.modelo+'</p> \
-                                    <p>'+val.sku+'</p> \
+            items.push( '<div class="row"> \
+                            <div class="result-wrapper"> \
+                                <div class="thumbnail"><img src="img/'+val.marca+'.jpg"></div> \
+                                <div class="desc"> \
+                                    <p>Marca: '+val.marca+'</p> \
+                                    <p>Modelo: '+val.modelo+'</p> \
+                                    <p>SKU: '+val.sku+'</p> \
                                 </div> \
                             </div> \
-                        </div> ' );
+                            <div class="line"><div> \
+                        </div>' );
             
         });
         
         $( id ).append(items);
+        $('#loadingDiv').hide();
 
     });
 };

@@ -12,7 +12,7 @@
 			unset($columID); 
 			$marca = $_GET["marca"];
 			$modelo = $_GET["modelo"];
-			$query = "SELECT DISTINCT version_auto FROM datos WHERE marca_auto='$marca' AND modelo_id='$modelo' ORDER BY version_auto ASC";
+			$query = "SELECT DISTINCT version_auto FROM datos WHERE marca_auto='$marca' AND modelo_id='$modelo' AND version_auto<>'' ORDER BY version_auto ASC";
 			$colum = "version_auto";
 			$columJ = "version";
 		}
@@ -21,7 +21,7 @@
 			$marca = $_GET["marca"];
 			$modelo = $_GET["modelo"];
 			$version = $_GET["version"];
-			$query = "SELECT DISTINCT anio_auto FROM datos WHERE marca_auto='$marca' AND modelo_id='$modelo' AND version_auto='$version' ORDER BY anio_auto ASC";
+			$query = "SELECT DISTINCT anio_auto FROM datos WHERE marca_auto='$marca' AND modelo_id='$modelo' AND version_auto='$version' AND anio_auto<>'' ORDER BY anio_auto ASC";
 			$colum = "anio_auto";
 			$columJ = "anio";
 		}
@@ -58,8 +58,15 @@
 	mysqli_close($con);
 	//$fp = fopen('results.json', 'w');
 	//fwrite($fp, json_encode($response));
+	
 	header('Content-Type: application/json');
-	echo json_encode($response);
+	//echo json_encode($response);
+	if (isset($_GET["callback"])) {
+		echo $_GET['callback'].'('.json_encode($response).')';
+	}else {
+		echo json_encode($response);
+	}
+	
 	//echo $marca;
 	//fclose($fp);	
 	

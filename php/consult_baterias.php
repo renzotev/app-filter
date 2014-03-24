@@ -52,7 +52,11 @@
 	//$fp = fopen('results.json', 'w');
 	//fwrite($fp, json_encode($response));
 	header('Content-Type: application/json');
-	echo json_encode($response);
+	if (isset($_GET["callback"])) {
+		echo $_GET['callback'].'('.json_encode($response).')';
+	}else {
+		echo json_encode($response);
+	}
 	//fclose($fp);	
 	
 ?> 

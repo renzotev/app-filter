@@ -6,50 +6,17 @@
     <head>
         <meta charset="utf-8">
         <title>SODIMAC - Elige la batería correcta para tu auto</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <!--<link rel="stylesheet" href="css/bootstrap.min.css">-->
+        <link rel="stylesheet" href="css/normalize.min.css">
         <link rel="stylesheet" href="css/style.css">
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-        
-        <style type="text/css">
-            html,
-            body {
-                margin: 0;
-                padding: 0;
-                height: 100%;
-            }
 
-            h1 {
-                margin: 0;
-            }
-        
-            footer {
-                position:absolute;
-                bottom:0;
-                width:100%;
-                height:60px;
-                background:#6cf;
-            }
-
-            .main {
-                 padding:10px 10px 60px 10px;
-                 max-width: 960px;
-                 margin: 0 auto;
-            }
-
-            .wrapper {
-                min-height: 100%;
-                position: relative;
-            }
-
-            
-
-        </style>
     </head>
     <body>
         <!--[if lt IE 8]>
-            <p class="chromeframe">Estas usando una <strong>versión desactualizada</strong> de tu navegador. Por favor <a href="http://browsehappy.com/">actualiza tu navegador</a> o <a href="http://www.google.com/chromeframe/?redirect=true">activa Google Chrome Frame</a> para una mejor experiencia.</p>
+            <p class="chromeframe">Estas usando una <strong>versión desactualizada</strong> de tu navegador. Por favor <a href="http://browsehappy.com/">actualiza tu navegador.</a>
         <![endif]-->
         
         <div class="wrapper">
@@ -57,38 +24,51 @@
                 <h1>ELIGE LA BATERÍA CORRECTA PARA TU AUTO</h1>
             </header>
             <div class="main">
-                <div class="row">
-                    <div class="col-sm-4 col-sm-offset-4">
-                        <select id="marca" class="form-control" required>
-                            <option value="-1">Marca</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-4 col-sm-offset-4">
-                        <select id="modelo" class="form-control" required>
-                            <option value="-1">Modelo</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-4 col-sm-offset-4">
-                        <select id="version" class="form-control">
-                            <option value="-1">Versión</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-4 col-sm-offset-4">
-                        <select id="anio" class="form-control">
-                            <option value="-1">Año</option>
-                        </select>
+                <div class="filter-wrapper">
+                    <div class="filter">
+                        <h2>Selecciona los datos de tu auto</h2>
+                        <div class="select">
+                            <select id="marca" class="form-control">
+                                <option value="-1">Marca</option>
+                            </select>
+                            <i class="icon-sort"><img src="img/flechas.png" height="30"></i>
+                        </div>
+                        <div class="select input-disabled">
+                            <select id="modelo" class="form-control" disabled="true">
+                                <option value="-1">Modelo</option>
+                            </select>
+                            <i class="icon-sort"><img src="img/flechas.png" height="30"></i>
+                        </div>
+                        <div class="select input-disabled">
+                            <select id="version" class="form-control" disabled="true">
+                                <option value="-1">Versión</option>
+                            </select>
+                            <i class="icon-sort"><img src="img/flechas.png" height="30"></i>
+                        </div>
+                        <div class="select input-disabled">
+                            <select id="anio" class="form-control" disabled="true">
+                                <option value="-1">Año</option>
+                            </select>
+                            <i class="icon-sort"><img src="img/flechas.png" height="30"></i>
+                        </div>
+                        <a class="button" id="consultar" href="#">
+                            Consultar
+                            <div class="loader" id="loadingDiv">
+                                <img src="img/loader.gif" width="22">
+                            </div>
+                        </a>
                     </div>
                 </div>
-                <div id="loadingDiv">Loading...</div>
-                <p><a id="consultar" href="#" class="btn btn-primary btn-lg" role="button">Consultar</a></p>
+                <div class="baterias-wrapper">
+                    <div class="baterias">
+                        <img src="img/baterias.jpg">
+                    </div>
+                </div>
             </div>
-            <footer><img src="#" alt="logo"></footer>
+            <footer><img src="img/homecenter.jpg" alt="SODIMAC - HOMECENTER" title="SODIMAC - HOMECENTER" height="50"></footer>
         </div>
-        
-                
-
+                        
         <script src="js/vendor/jquery-1.10.2.min.js"></script>
-		<script src="js/vendor/bootstrap.min.js"></script>
-        <script src="js/main.js?v=2"></script>
+        <script src="js/main.js"></script>
     </body>
 </html>
