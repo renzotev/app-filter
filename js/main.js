@@ -65,6 +65,9 @@ var $consultas_auto = function (id, filtro) {
 		   	$( id ).append(items);
 		   	$(id).parent().removeClass("input-disabled");
 		   	$(id).prop("disabled", false);
+	 	}else {
+	 		$(".msg-error").text("No tenemos mas datos del auto seleccionado, por favor dar clic en consultar.")
+	 						.css({"color":"#f0ad4e","display":"block"});
 	 	}
 
 		$('#loadingDiv').hide();
@@ -73,6 +76,7 @@ var $consultas_auto = function (id, filtro) {
 };
 
 $("#marca").change( function () {
+	$(".msg-error").css("display","none");
 	var selected = $(this).find("option:selected").val();
 	consulta_url[1]= "marca="+selected;
 
@@ -100,6 +104,7 @@ $("#marca").change( function () {
 });
 
 $("#modelo").change( function () {
+	$(".msg-error").css("display","none");
 	var selected = $(this).find("option:selected").val();
 	consulta_url[2] = "&modelo="+selected;
 
@@ -153,6 +158,13 @@ $("#anio").change( function () {
 
 
 $consultas_auto("#marca", 0);
+
+$("#consultar").on("click", function (e) {
+	if ($(this).attr("href") == "#") {
+		e.preventDefault();
+		$(".msg-error").text("Por favor, selecciona una marca y un modelo.").css("display","block");
+	}
+});
 
 (function () {
 	var id = ["#modelo", "#version", "#anio"];
