@@ -1,5 +1,4 @@
 var sPageURL = window.location.search;
-console.log(sPageURL);
 
 var $consultas_bateria = function (id) {
 
@@ -30,15 +29,3 @@ var $consultas_bateria = function (id) {
 };
 
 $consultas_bateria("#resultados");
-
-/*var template = function () {
-
-                     '  <div class="col-sm-6"> //
-                            <div class="thumbnail"> //
-                                    <div class="caption"> //
-                                    <h3>CAPSA</h3> //
-                                    <p>SKU: 564656165165</p>//
-                                </div> //
-                            </div> //
-                        </div> //'
-                }*/
