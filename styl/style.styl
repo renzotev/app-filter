@@ -68,7 +68,7 @@ footer
 	.select
 		&:hover,
 		&:active
-			background #F3F3F3
+			background-color #F3F3F3
 
 	select,
 	i
@@ -120,6 +120,10 @@ footer
 
 			p
 				margin .5em 0
+
+.lt-ie9
+	.select
+		background-image url("../img/flechas-ie.png") !important
 	
 .main 
 	margin 0 auto
@@ -173,10 +177,14 @@ footer
 				-moz-box-shadow 0 1px 3px rgba(0,0,0,0.2)
 				margin 1em
 				position relative
+				background-image url("../img/flechas.png")
+				background-repeat no-repeat
+				background-position right 15px
+				background-size 30px
 
 				&:hover,
 				&:active
-					background #F3F3F3
+					background-color #F3F3F3
 
 				.icon-sort
 					cursor pointer
@@ -185,19 +193,23 @@ footer
 					right 0
 					line-height 47px
 					margin-right 1em
+					background-size contain
+					width 20px
+					height 20px
 
 				select
-					width 115%
+					-webkit-appearance none
 					background-color transparent
 					background-image none
-					-webkit-appearance none
 					border none
 					box-shadow none
 					color gris
 					cursor pointer
 					font-size 1.2em
-					padding .8em
 					outline none
+					padding .8em
+					text-transform uppercase
+					width 115%
 
 			.loader
 				position absolute
