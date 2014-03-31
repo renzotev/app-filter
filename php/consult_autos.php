@@ -3,7 +3,7 @@
 	if (isset($_GET["marca"]) || isset($_GET["modelo"]) || isset($_GET["version"])) {
 		if (isset($_GET["marca"])) { 
 			$marca = $_GET["marca"];
-			$query = "SELECT  DISTINCT modelo_id,modelo_auto FROM datos WHERE marca_auto='$marca' ORDER BY modelo_id ASC";
+			$query = "SELECT  DISTINCT modelo_id,modelo_auto FROM datos WHERE marca_auto='$marca' ORDER BY modelo_id DESC";
 			$columID = "modelo_id";
 			$colum = "modelo_auto";
 			$columJ = "modelo";
@@ -12,7 +12,7 @@
 			unset($columID); 
 			$marca = $_GET["marca"];
 			$modelo = $_GET["modelo"];
-			$query = "SELECT DISTINCT version_auto FROM datos WHERE marca_auto='$marca' AND modelo_id='$modelo' AND version_auto<>'' ORDER BY version_auto ASC";
+			$query = "SELECT DISTINCT version_auto FROM datos WHERE marca_auto='$marca' AND modelo_id='$modelo' AND version_auto<>'' ORDER BY version_auto DESC";
 			$colum = "version_auto";
 			$columJ = "version";
 		}
@@ -21,23 +21,22 @@
 			$marca = $_GET["marca"];
 			$modelo = $_GET["modelo"];
 			$version = $_GET["version"];
-			$query = "SELECT DISTINCT anio_auto FROM datos WHERE marca_auto='$marca' AND modelo_id='$modelo' AND version_auto='$version' AND anio_auto<>'' ORDER BY anio_auto ASC";
+			$query = "SELECT DISTINCT anio_auto FROM datos WHERE marca_auto='$marca' AND modelo_id='$modelo' AND version_auto='$version' AND anio_auto<>'' ORDER BY anio_auto DESC";
 			$colum = "anio_auto";
 			$columJ = "anio";
 		}
 	} else {
 		$colum = "marca_auto";
-		$query = "SELECT DISTINCT marca_auto FROM datos ORDER BY marca_auto ASC";
+		$query = "SELECT DISTINCT marca_auto FROM datos ORDER BY marca_auto DESC";
 		$columJ = "marca";
 	}
 
 	$con=mysqli_connect("localhost","root","","autos_baterias");
-	// Check connection
+
 	if (mysqli_connect_errno()) {
 		echo "Error al conectarse con MYSQL: " . mysqli_connect_error();
 	}
 
-	//$query = "SELECT * FROM datos WHERE marca_auto='$marca' AND modelo_auto='$modelo_auto' AND version_auto='$version_auto' AND anio_auto='$anio_auto'";
 	$result = mysqli_query($con,$query);
 	$response = array();
 	$autos = array();
@@ -56,18 +55,13 @@
 	$response['autos'] = $autos;
 
 	mysqli_close($con);
-	//$fp = fopen('results.json', 'w');
-	//fwrite($fp, json_encode($response));
 	
 	header('Content-Type: application/json');
-	//echo json_encode($response);
+
 	if (isset($_GET["callback"])) {
 		echo $_GET['callback'].'('.json_encode($response).')';
 	}else {
 		echo json_encode($response);
-	}
-	
-	//echo $marca;
-	//fclose($fp);	
+	}	
 	
 ?> 
