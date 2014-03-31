@@ -7,20 +7,20 @@
 		if (isset($_GET["marca"]) && isset($_GET["modelo"])) { 
 			$marca = $_GET["marca"]; 
 			$modelo = $_GET["modelo"];  
-			$query = "SELECT DISTINCT marca_bateria,modelo_bateria,sku_bateria FROM datos WHERE marca_auto='$marca' AND modelo_id='$modelo' ORDER BY modelo_bateria DESC"; 
+			$query = "SELECT DISTINCT marca_bateria,modelo_bateria,sku_bateria FROM datos WHERE marca_auto='$marca' AND modelo_id='$modelo' ORDER BY modelo_bateria ASC"; 
 		}
 		if (isset($_GET["marca"]) && isset($_GET["modelo"]) && isset($_GET["version"])) { 
 			$marca = $_GET["marca"]; 
 			$modelo = $_GET["modelo"];
 			$version = $_GET["version"];    
-			$query = "SELECT DISTINCT marca_bateria,modelo_bateria,sku_bateria FROM datos WHERE marca_auto='$marca' AND modelo_id='$modelo' AND version_auto='$version' ORDER BY modelo_bateria DESC"; 
+			$query = "SELECT DISTINCT marca_bateria,modelo_bateria,sku_bateria FROM datos WHERE marca_auto='$marca' AND modelo_id='$modelo' AND version_auto='$version' ORDER BY modelo_bateria ASC"; 
 		}
 		if (isset($_GET["marca"]) && isset($_GET["modelo"]) && isset($_GET["version"]) && isset($_GET["anio"])) { 
 			$marca = $_GET["marca"]; 
 			$modelo = $_GET["modelo"];
 			$version = $_GET["version"];
 			$anio = $_GET["anio"];
-			$query = "SELECT DISTINCT marca_bateria,modelo_bateria,sku_bateria FROM datos WHERE marca_auto='$marca' AND modelo_id='$modelo' AND version_auto='$version' AND anio_auto='$anio' ORDER BY modelo_bateria DESC"; 
+			$query = "SELECT DISTINCT marca_bateria,modelo_bateria,sku_bateria FROM datos WHERE marca_auto='$marca' AND modelo_id='$modelo' AND version_auto='$version' AND anio_auto='$anio' ORDER BY modelo_bateria ASC"; 
 		}
 		
 	} 
