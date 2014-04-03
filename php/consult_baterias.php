@@ -4,12 +4,12 @@
 		$colum = array("marca" => "marca_bateria", "modelo" => "modelo_bateria", "sku" => "sku_bateria");
 		$columJ = array("marca","modelo","sku");
 
-		if (isset($_GET["marca"]) && isset($_GET["modelo"])) { 
+		if (isset($_GET["marca"]) && isset($_GET["modelo"]) && !isset($_GET["version"]) && !isset($_GET["anio"])) { 
 			$marca = $_GET["marca"]; 
 			$modelo = $_GET["modelo"];  
 			$query = "SELECT DISTINCT marca_bateria,modelo_bateria,sku_bateria FROM datos WHERE marca_auto='$marca' AND modelo_id='$modelo' ORDER BY modelo_bateria ASC"; 
 		}
-		if (isset($_GET["marca"]) && isset($_GET["modelo"]) && isset($_GET["version"])) { 
+		if (isset($_GET["marca"]) && isset($_GET["modelo"]) && isset($_GET["version"]) && !isset($_GET["anio"])) { 
 			$marca = $_GET["marca"]; 
 			$modelo = $_GET["modelo"];
 			$version = $_GET["version"];    
@@ -25,11 +25,7 @@
 		
 	} 
 
-	$con=mysqli_connect("localhost","root","","autos_baterias");
-
-	if (mysqli_connect_errno()) {
-		echo "Error al conectarse con MYSQL: " . mysqli_connect_error();
-	}
+	include("conexion.php");
 
 	$result = mysqli_query($con,$query);
 	$response = array();
