@@ -1,9 +1,29 @@
 <?php
+/*
+if (isset($_GET[0])) {
+	echo "existe".$_GET;
+}else {
+	echo "no existe";
+}
+
+
+foreach($_GET as $key => $value)
+{
+   $string = $key;
+	extract(array($string => $value));
+	echo $string;
+   //echo 'Key = ' . $key . '<br />';
+   //echo 'Value= ' . $value;
+   
+}
+//echo "<br>".$marca;
+//echo "<br>".$modelo;
+die;*/
 
 	if (isset($_GET["marca"]) || isset($_GET["modelo"]) || isset($_GET["version"])) {
 		if (isset($_GET["marca"]) && !isset($_GET["modelo"]) && !isset($_GET["version"])) { 
 			$marca = $_GET["marca"];
-			$query = "SELECT  DISTINCT modelo_id,modelo_auto FROM datos WHERE marca_auto='$marca' ORDER BY modelo_id ASC";
+			$query = "SELECT DISTINCT modelo_id,modelo_auto FROM datos WHERE marca_auto='$marca' ORDER BY modelo_id ASC";
 			$columID = "modelo_id";
 			$colum = "modelo_auto";
 			$columJ = "modelo";
