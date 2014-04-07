@@ -5,12 +5,12 @@
 	/* Nombre de la tabla donde se encuentran los datos*/
 	define( 'DB_TABLE', 'datos' );
 
-	/* Nombre de usuario asignado a la base de datos */
+	/* Nombre del usuario de MySQL */
 	define( 'DB_USER', 'root' );
 
-	/* Password del usuario asignado a la base de datos */
+	/* Contraseña de MySQL */
 	define( 'DB_PASSWORD', '' );
 
-	/* Host de la base datos */
+	/* Host de MySQL */
 	define( 'DB_HOST', 'localhost' );
 ?>
