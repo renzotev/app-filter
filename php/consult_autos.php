@@ -1,60 +1,65 @@
 <?php
-/*
-if (isset($_GET[0])) {
-	echo "existe".$_GET;
-}else {
-	echo "no existe";
-}
+
+	/* Traemos todos los datos para la conexión*/
+	include("conexion.php");
+	
+
+	/* Nos conectamos a la base de datos*/
+	$con=mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (mysqli_connect_errno()) {
+		echo "Error al conectarse con MYSQL: " . mysqli_connect_error();
+		die;
+	} else {
+		mysqli_query($con, "SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
+	}
 
 
-foreach($_GET as $key => $value)
-{
-   $string = $key;
-	extract(array($string => $value));
-	echo $string;
-   //echo 'Key = ' . $key . '<br />';
-   //echo 'Value= ' . $value;
-   
-}
-//echo "<br>".$marca;
-//echo "<br>".$modelo;
-die;*/
+	/* Declaramos una variable que guardara el número de GETS que mandamos por la url*/
+	$get_num = 0;
 
-	if (isset($_GET["marca"]) || isset($_GET["modelo"]) || isset($_GET["version"])) {
-		if (isset($_GET["marca"]) && !isset($_GET["modelo"]) && !isset($_GET["version"])) { 
-			$marca = $_GET["marca"];
-			$query = "SELECT DISTINCT modelo_id,modelo_auto FROM datos WHERE marca_auto='$marca' ORDER BY modelo_id ASC";
+
+	/*Guardamos todos los GETS en variables*/
+	foreach($_GET as $key => $value)
+	{
+	   $get = $key;
+		extract(array($get => $value));
+		$get_num +=1;
+	}
+
+
+	/* Asignamos las consulta según el número de GETS obtenidos */
+	if ($get_num >= 1 && $get_num <= 3 ) {	
+		if ($get_num == 1) { 
+			$query = "SELECT DISTINCT modelo_id,modelo_auto FROM ".DB_TABLE." WHERE marca_auto='$marca' ORDER BY modelo_id ASC";
 			$columID = "modelo_id";
 			$colum = "modelo_auto";
 			$columJ = "modelo";
 		}
-		if (isset($_GET["marca"]) && isset($_GET["modelo"]) && !isset($_GET["version"])) {
-			$marca = $_GET["marca"];
-			$modelo = $_GET["modelo"];
-			$query = "SELECT DISTINCT version_auto FROM datos WHERE marca_auto='$marca' AND modelo_id='$modelo' AND version_auto<>'' ORDER BY version_auto ASC";
+		if ($get_num == 2) {
+			$query = "SELECT DISTINCT version_auto FROM ".DB_TABLE." WHERE marca_auto='$marca' AND modelo_id='$modelo' AND version_auto<>'' ORDER BY version_auto ASC";
 			$colum = "version_auto";
 			$columJ = "version";
 		}
-		if (isset($_GET["marca"]) && isset($_GET["modelo"]) && isset($_GET["version"])) {
-			$marca = $_GET["marca"];
-			$modelo = $_GET["modelo"];
-			$version = $_GET["version"];
-			$query = "SELECT DISTINCT anio_auto FROM datos WHERE marca_auto='$marca' AND modelo_id='$modelo' AND version_auto='$version' AND anio_auto<>'' ORDER BY anio_auto DESC";
+		if ($get_num == 3) {
+			$query = "SELECT DISTINCT anio_auto FROM ".DB_TABLE." WHERE marca_auto='$marca' AND modelo_id='$modelo' AND version_auto='$version' AND anio_auto<>'' ORDER BY anio_auto ASC";
 			$colum = "anio_auto";
 			$columJ = "anio";
 		}
 	} else {
 		$colum = "marca_auto";
-		$query = "SELECT DISTINCT marca_auto FROM datos ORDER BY marca_auto ASC";
+		$query = "SELECT DISTINCT marca_auto FROM ".DB_TABLE." ORDER BY marca_auto ASC";
 		$columJ = "marca";
 	}
+	
 
-	include("conexion.php");
-
+	/* Mandamos la consulta a la base de datos */
 	$result = mysqli_query($con,$query);
 	$response = array();
 	$autos = array();
 
+
+	/* Armamos nuestro JSON*/
 	while($row = mysqli_fetch_array($result)) {
 		if (isset($columID)) {
 			$to_json=$row[$colum];
@@ -65,15 +70,20 @@ die;*/
 			$autos[] = array($columJ => $to_json);
 		}
 	}
-
 	$response['autos'] = $autos;
 
+
+	/*Cerramos la conexión con la base de datos*/
 	mysqli_close($con);
 	
+
+	/* Declaramos el tipo de documento como JSON */
 	header('Content-Type: application/json');
 
-	if (isset($_GET["callback"])) {
-		echo $_GET['callback'].'('.json_encode($response).')';
+
+	/* Renderizamos nuestro JSON, renderizamos un JSONP en caso exista la variable "callback" */
+	if (isset($callback)) {
+		echo $callback.'('.json_encode($response).')';
 	}else {
 		echo json_encode($response);
 	}	

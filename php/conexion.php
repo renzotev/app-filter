@@ -1,10 +1,16 @@
 <?php 
-	$con=mysqli_connect("localhost","root","","autos_baterias");
+	/* Nombre de la base de datos */
+	define( 'DB_NAME', 'autos_baterias' );
 
-	mysqli_query($con, "SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
+	/* Nombre de la tabla donde se encuentran los datos*/
+	define( 'DB_TABLE', 'datos' );
 
+	/* Nombre de usuario asignado a la base de datos */
+	define( 'DB_USER', 'root' );
 
-	if (mysqli_connect_errno()) {
-		echo "Error al conectarse con MYSQL: " . mysqli_connect_error();
-	}
+	/* Password del usuario asignado a la base de datos */
+	define( 'DB_PASSWORD', '' );
+
+	/* Host de la base datos */
+	define( 'DB_HOST', 'localhost' );
 ?>
