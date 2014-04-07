@@ -1,9 +1,6 @@
 /* Creamos un Array donde guardaremos los parametros que mandaremos por la URL*/
 var consulta_url = ["?"];
 
-/* Creamos un Array donde guardaremos los select a resetear */
-var id_select = [];
-
 
 /* Creamos una funcion que retornara la ruta de nuestro JSON con los parametros asignados*/
 var ruta_json = function (filtro) {
@@ -51,12 +48,12 @@ var pinta_select = function (items, id) {
 
 
 /* Creamos una funcion para resetear los select */
-var reset_select = function (id) {
-	for(i=0;i<id.length;i++) {
-		var opt_text = $( id[i] ).find("option[value='-1']").text();
-		$( id[i] ).html("<option value='-1'>" + opt_text + "</option>");
-		$( id[i] ).parent().addClass("input-disabled");
-		$( id[i] ).prop("disabled", true);
+var reset_select = function () {
+	for(i=0;i<arguments.length;i++) {
+		var opt_text = $( arguments[i] ).find("option[value='-1']").text();
+		$( arguments[i] ).html("<option value='-1'>" + opt_text + "</option>");
+		$( arguments[i] ).parent().addClass("input-disabled");
+		$( arguments[i] ).prop("disabled", true);
 	}
 }
 
@@ -102,15 +99,11 @@ $("#marca").change( function () {
 	consulta_url[1]= "marca="+selected;
 
 	/* Reseteamos los valores de los select que esten por debajo */
-	id_select = [ '#version', '#anio' ];
-	reset_select(id_select);
-	id_select = [];
+	reset_select('#version', '#anio');
 
 	/* Reseteamos el valor de modelo en caso no seleccionemos ninguna opcion*/
 	if (selected == "-1") {
-		id_select = [ '#modelo' ];
-		reset_select(id_select);
-		id_select = [];
+		reset_select('#modelo');
 
 		consulta_url.splice(1, 4);	
 	}else {
@@ -135,15 +128,11 @@ $("#modelo").change( function () {
 	consulta_url[2] = "&modelo="+selected;
 
 	/* Reseteamos los varoles de los select que esten por debajo */
-	id_select = [ '#anio' ];
-	reset_select(id_select);
-	id_select = [];
+	reset_select('#anio');
 
 	/* Reseteamos el valor de version en caso no seleccionemos ninguna opcion*/
 	if (selected == "-1") {
-		id_select = [ '#version' ];
-		reset_select(id_select);
-		id_select = [];
+		reset_select('#version');
 		
 		consulta_url.splice(2, 3);
 
@@ -169,9 +158,7 @@ $("#version").change( function () {
 
 	/* Reseteamos el valor de año en caso no seleccionemos ninguna opcion*/
 	if (selected == "-1") {
-		id_select = [ '#anio' ];
-		reset_select(id_select);
-		id_select = [];
+		reset_select('#anio');
 
 		consulta_url.splice(3, 2);
 	}else {
