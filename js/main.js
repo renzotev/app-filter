@@ -3,7 +3,7 @@ var consulta_url = ["?"];
 
 
 /* Creamos una funcion que retornara la ruta de nuestro JSON con los parametros asignados*/
-var ruta_json = function (filtro) {
+var $ruta_json = function (filtro) {
 	if (filtro == 0) {
 		var consulta_get = "php/consult_autos.php";
 	}else {
@@ -27,7 +27,7 @@ var ruta_json = function (filtro) {
 
 
 /* Creamos una funcion que pinta los datos en nuestro select*/
-var pinta_select = function (items, id) {
+var $pinta_select = function (items, id) {
 	if (items.length != 0) {
 
 		/* Pintamos los datos en nuestro select*/
@@ -48,7 +48,7 @@ var pinta_select = function (items, id) {
 
 
 /* Creamos una funcion para resetear los select */
-var reset_select = function () {
+var $reset_select = function () {
 	for(i=0;i<arguments.length;i++) {
 		var opt_text = $( arguments[i] ).find("option[value='-1']").text();
 		$( arguments[i] ).html("<option value='-1'>" + opt_text + "</option>");
@@ -64,7 +64,7 @@ var $consultas_auto = function (id, filtro) {
 	$('#loadingDiv').show();
 
 	/* Hacemos la consulta y guardamos nuestros resultados en un Array*/
-	$.getJSON( ruta_json(filtro), function( data ) {
+	$.getJSON( $ruta_json(filtro), function( data ) {
 	  	var items = [];
 	  	$.each( data.autos, function( key, val ) {
 	  		if (filtro == "marca") {
@@ -81,7 +81,7 @@ var $consultas_auto = function (id, filtro) {
 	  	});
 	 	
 	  	/* Pintamos nuestro select y ocultamos el loader */
-	 	pinta_select(items, id);
+	 	$pinta_select(items, id);
 		$('#loadingDiv').hide();
 
 	});
@@ -99,11 +99,11 @@ $("#marca").change( function () {
 	consulta_url[1]= "marca="+selected;
 
 	/* Reseteamos los valores de los select que esten por debajo */
-	reset_select('#version', '#anio');
+	$reset_select('#version', '#anio');
 
 	/* Reseteamos el valor de modelo en caso no seleccionemos ninguna opcion*/
 	if (selected == "-1") {
-		reset_select('#modelo');
+		$reset_select('#modelo');
 
 		consulta_url.splice(1, 4);	
 	}else {
@@ -128,11 +128,11 @@ $("#modelo").change( function () {
 	consulta_url[2] = "&modelo="+selected;
 
 	/* Reseteamos los varoles de los select que esten por debajo */
-	reset_select('#anio');
+	$reset_select('#anio');
 
 	/* Reseteamos el valor de version en caso no seleccionemos ninguna opcion*/
 	if (selected == "-1") {
-		reset_select('#version');
+		$reset_select('#version');
 		
 		consulta_url.splice(2, 3);
 
@@ -158,7 +158,7 @@ $("#version").change( function () {
 
 	/* Reseteamos el valor de año en caso no seleccionemos ninguna opcion*/
 	if (selected == "-1") {
-		reset_select('#anio');
+		$reset_select('#anio');
 
 		consulta_url.splice(3, 2);
 	}else {
