@@ -45,7 +45,9 @@
 			$query = "SELECT DISTINCT marca_bateria,modelo_bateria,sku_bateria FROM ".DB_TABLE." WHERE marca_auto='$marca' AND modelo_id='$modelo' AND (version_auto='$version' OR version_auto='') AND (anio_auto='$anio' OR anio_auto='') ORDER BY modelo_bateria ASC"; 
 		}
 		
-	} 
+	} else {
+		die;
+	}
 
 
 	/* Mandamos la consulta a la base de datos */
